@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+
+    <style>
+      body { 
+        display: none; 
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+      }
+      
+      #love-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #ffe4e6; 
+      }
+
+      .paper-sheet {
+        background-color: #fffaf0;
+        background-image: linear-gradient(#fecdd3 1px, transparent 1px);
+        background-size: 100% 2rem;
+        line-height: 2rem;
+        position: relative;
+        padding: 2rem;
+        padding-top: 3rem;
+        box-shadow: 5px 5px 20px rgba(225, 29, 72, 0.1);
+        border-radius: 2px;
+      }
+
+      .paper-sheet::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 40px;
+        width: 2px;
+        height: 100%;
+        background-color: rgba(244, 114, 182, 0.3);
+      }
+
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-thumb { background: #fda4af; border-radius: 10px; }
+
+      /* Kustomisasi Fancybox agar bernuansa Pink */
+      :root {
+        --f-button-bg: #fb7185;
+        --f-button-hover-bg: #f43f5e;
+      }
+    </style>
+  </head>
+  <body id="main-body" class="p-5 md:p-10 flex flex-col items-center min-h-screen">
+    
+    <canvas id="love-background"></canvas>
+
+    <div class="max-w-4xl w-full mx-auto space-y-8 relative z-10">
+      
+      <div class="bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-pink-100">
+        <div class="flex justify-between items-center mb-6 border-b pb-5 border-pink-100">
+          <h1 class="text-2xl font-bold text-pink-700">Dashboard</h1>
+          <button id="logout-btn" class="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 active:scale-95 transition-all">Logout</button>
+        </div>
+        <div class="bg-pink-100/50 border-l-4 border-pink-500 p-4">
+          <p class="text-pink-800 text-sm md:text-base font-medium">Selamat datang Sayangg! Halaman ini khusus buat kamu yang tersayanggg. ✨</p>
+        </div>
+      </div>
+
+      <div class="paper-edge transform -rotate-1 hover:rotate-0 transition-transform duration-500">
+        <div class="paper-sheet rounded-sm overflow-hidden">
+          <h2 class="text-2xl font-bold text-pink-800 mb-4 flex items-center gap-2 relative z-10">
+            💌 Untuk Kamu
+          </h2>
+          <div class="text-gray-700 italic text-lg relative z-10 pl-6 space-y-4">
+            <p>"Hai Cantik, terima kasih ya sudah mampir ke sini. Aku sengaja buatkan halaman ini khusus buat kamu."</p>
+            <p>"Semoga harimu menyenangkan seindah senyummu hari ini. Jangan lupa bahagia ya! ✨"</p>
+            <p>"Maafkan sikap aku, kata-kata aku, dan semua kekuranganku yang membuat kamu sakit hati atau kepikiran."</p>
+            <p>"Harapanku kamu tetap bahagia, ceria, dan selalu merasa dicintai."</p>
+            <p>"Terima kasih sudah bertahan sejauh ini, aku percaya penuh kepadamu Sayanggg."</p>
+            <p class="mt-12 font-bold text-right text-pink-600">- Sipaling Akanglah</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-pink-100">
+        <h2 class="text-2xl font-bold text-pink-800 mb-6 flex items-center gap-2">
+          📸 Galeri Kenangan
+        </h2>
+        
+        <div class="columns-2 md:columns-3 gap-4 space-y-4">
+
+          <a href="photo/2.jpg" data-fancybox="gallery" data-caption="">
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform border-2 border-transparent hover:border-pink-300 cursor-zoom-in">
+              <img src="photo/2.jpg" alt="Kenangan 2" class="w-full h-auto">
+            </div>
+          </a>
+
+          <a href="photo/3.jpg" data-fancybox="gallery" data-caption="">
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform border-2 border-transparent hover:border-pink-300 cursor-zoom-in">
+              <img src="photo/3.jpg" alt="Kenangan 3" class="w-full h-auto">
+            </div>
+          </a>
+
+          <a href="photo/1.jpg" data-fancybox="gallery" data-caption="">
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform border-2 border-transparent hover:border-pink-300 cursor-zoom-in">
+              <img src="photo/1.jpg" alt="Kenangan 1" class="w-full h-auto">
+            </div>
+          </a>
+
+          <a href="photo/4.jpg" data-fancybox="gallery" data-caption="">
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform border-2 border-transparent hover:border-pink-300 cursor-zoom-in">
+              <img src="photo/4.jpg" alt="Kenangan 4" class="w-full h-auto">
+            </div>
+          </a>
+
+          <a href="photo/5.jpg" data-fancybox="gallery" data-caption="">
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform border-2 border-transparent hover:border-pink-300 cursor-zoom-in">
+              <img src="photo/5.jpg" alt="Kenangan 5" class="w-full h-auto">
+            </div>
+          </a>
+
+          <a href="photo/6.jpg" data-fancybox="gallery" data-caption="">
+            <div class="break-inside-avoid rounded-xl overflow-hidden shadow-md hover:scale-105 transition-transform border-2 border-transparent hover:border-pink-300 cursor-zoom-in">
+              <img src="photo/6.jpg" alt="Kenangan 5" class="w-full h-auto">
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="p-3 flex justify-center w-[90%]">
+        <div class=" w-full flex">
+          <p class="text-pink-600 text-sm text-start pb-5 w-[80%]">Jalan Jalan Ke Kota Kembang, Ngak Lupa Mampir Ke Soreang</p>
+          <p class="text-pink-600 text-sm text-end w-[80%]">Izinkan Untuk Terbang, Ke Perempuan Yang Aku Sayang azekk</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+      // Inisialisasi Fancybox
+      Fancybox.bind("[data-fancybox]", {
+        // Kustomisasi opsi di sini
+        Compact: false,
+        Images: {
+          Panzoom: {
+            maxScale: 2,
+          },
+        },
+      });
+
+      // LOGIKA LOGIN
+      function protectPage() {
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn !== "true") {
+          window.location.href = "login.html";
+        } else {
+          document.getElementById("main-body").style.display = "block";
+        }
+      }
+      protectPage();
+
+      document.getElementById("logout-btn").addEventListener("click", () => {
+        localStorage.clear();
+        window.location.href = "login.html";
+      });
+
+      // CANVAS ANIMASI (Hati)
+      const canvas = document.getElementById('love-background');
+      const ctx = canvas.getContext('2d');
+      let width, height, hearts = [];
+      const heartCount = 50; 
+      const emojis = ['❤️', '💖', '💝',];
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      class Heart {
+        constructor() { this.init(); }
+        init() {
+          this.x = Math.random() * width;
+          this.y = height + Math.random() * 100;
+          this.opacity = Math.random() * 0.5 + 0.3;
+          this.size = Math.random() * 15 + 15;
+          this.speed = Math.random() * 1 + 1;
+          this.sway = Math.random() * 0.02;
+          this.swayOffset = Math.random() * Math.PI * 2;
+          this.emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        }
+        update() {
+          this.y -= this.speed;
+          this.swayOffset += this.sway;
+          this.x += Math.sin(this.swayOffset) * 0.5;
+          if (this.y < -50) this.init();
+        }
+        draw() {
+          ctx.globalAlpha = this.opacity;
+          ctx.font = `${this.size}px serif`;
+          ctx.fillText(this.emoji, this.x, this.y);
+        }
+      }
+
+      for (let i = 0; i < heartCount; i++) { hearts.push(new Heart()); }
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        hearts.forEach(heart => { heart.update(); heart.draw(); });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    </script>
+  </body>
+</html>

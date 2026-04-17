@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: transparent;
+      }
+      #love-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #ffe4e6;
+      }
+      /* Custom style agar SweetAlert lebih estetik */
+      .swal2-popup {
+        border-radius: 1.5rem !important;
+      }
+    </style>
+  </head>
+  <body class="flex items-center justify-center h-screen relative overflow-hidden">
+    
+    <canvas id="love-background"></canvas>
+
+    <div class="bg-pink-50/90 p-8 rounded-2xl shadow-xl w-full max-w-sm backdrop-blur-md border border-pink-100 relative z-10">
+      <h2 class="text-3xl font-bold mb-2 text-pink-600 text-center">Halo Cantikk!</h2>
+      <p class="text-pink-400 text-center mb-8 text-sm font-medium">
+        Silakan masukkan password untuk masuk.
+      </p>
+
+      <div class="mb-4">
+        <label class="block text-sm font-semibold text-pink-700 mb-2">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="••••••••"
+          class="w-full px-4 py-3 border border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-400 focus:outline-none transition-all bg-white/80 placeholder-pink-200"
+        />
+        <p id="error-message" class="text-red-500 text-xs mt-2 hidden leading-relaxed">
+          Password salah, silakan coba lagi.
+        </p>
+      </div>
+
+      <button
+        id="login-btn"
+        class="w-full bg-pink-500 text-white font-bold py-3 rounded-xl hover:bg-pink-600 active:scale-95 transition-all shadow-lg shadow-pink-200"
+      >
+        MASUK
+      </button>
+    </div>
+
+    <script>
+      const SECRET_PASSWORD = "12345";
+      const loginBtn = document.getElementById("login-btn");
+      const passwordInput = document.getElementById("password");
+      const errorMsg = document.getElementById("error-message");
+
+      function handleLogin() {
+        if (passwordInput.value === SECRET_PASSWORD) {
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("loginTimestamp", new Date().getTime().toString());
+          
+          Swal.fire({
+            icon: 'success',
+            title: 'Password Benar!',
+            text: 'Selamat datang, Sayang!',
+            timer: 1500,
+            showConfirmButton: false,
+            background: '#fff5f7',
+            color: '#db2777'
+          }).then(() => {
+            window.location.href = "home.html";
+          });
+        } else {
+          // Reset styling input
+          passwordInput.classList.add("border-red-400", "bg-red-50");
+          passwordInput.value = "";
+          errorMsg.classList.remove("hidden");
+
+          // Tampilkan SweetAlert Input
+          Swal.fire({
+            title: 'Password Salah!',
+            html: 'Buktikan kalau ini kamu ya cantik,<br>masukkan <b>Tanggal, Bulan, & Tahun Lahir</b>:',
+            input: 'text',
+            inputPlaceholder: 'Contoh : Tanggal/Bulan/Tahun ',
+            icon: 'error',
+            confirmButtonText: 'Kirim ke Akang',
+            confirmButtonColor: '#ec4899',
+            showCancelButton: true,
+            cancelButtonText: 'Coba Lagi',
+            background: '#fff1f2',
+            color: '#be185d',
+            preConfirm: (value) => {
+              if (!value) {
+                Swal.showValidationMessage('Isi dulu ya sayang!');
+              }
+              return value;
+            }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const tglLahir = result.value;
+              const phone = "6283870640345";
+              const message = `Halo Akang, ini aku. Aku ingin password seperti ini ${tglLahir}.`;
+              
+              // Membuat link WhatsApp dan membukanya
+              const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+              window.open(waLink, '_blank');
+            }
+          });
+        }
+      }
+
+      loginBtn.addEventListener("click", handleLogin);
+      passwordInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleLogin();
+      });
+
+      // Animasi Background Hati
+      const canvas = document.getElementById('love-background');
+      const ctx = canvas.getContext('2d');
+      let width, height, hearts = [];
+      const emojis = ['❤️', '💖', '💝', '💗'];
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      class Heart {
+        constructor() { this.init(); }
+        init() {
+          this.x = Math.random() * width;
+          this.y = height + Math.random() * 100;
+          this.opacity = Math.random() * 0.5 + 0.3;
+          this.size = Math.random() * 15 + 12;
+          this.speed = Math.random() * 1 + 0.5;
+          this.sway = Math.random() * 0.02;
+          this.swayOffset = Math.random() * Math.PI * 2;
+          this.emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        }
+        update() {
+          this.y -= this.speed;
+          this.swayOffset += this.sway;
+          this.x += Math.sin(this.swayOffset) * 0.5;
+          if (this.y < -30) this.init();
+        }
+        draw() {
+          ctx.globalAlpha = this.opacity;
+          ctx.font = `${this.size}px serif`;
+          ctx.fillText(this.emoji, this.x, this.y);
+        }
+      }
+
+      for (let i = 0; i < 40; i++) hearts.push(new Heart());
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        hearts.forEach(h => { h.update(); h.draw(); });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    </script>
+  </body>
+</html>
